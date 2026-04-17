@@ -24,7 +24,7 @@ from src.date_range_dialog import ask_date_range
 log = logging.getLogger(__name__)
 
 
-def _create_icon_image(text: str = "ST") -> "Image.Image":
+def _create_icon_image(text: str = "CS") -> "Image.Image":
     """生成简单的托盘图标图像"""
     size = 64
     img = Image.new("RGBA", (size, size), (52, 120, 246, 255))
@@ -60,7 +60,7 @@ class TrayManager:
         self._settings_window = SettingsWindow(config, on_save=self._on_settings_saved)
 
         self._icon: Optional[pystray.Icon] = None
-        self._tooltip = "屏幕时间追踪器"
+        self._tooltip = "Chronoscope"
 
     def update_tooltip(self, app_name: str, today_total: int):
         text = f"今日: {format_seconds(today_total)} | 当前: {app_name}"
@@ -70,7 +70,7 @@ class TrayManager:
 
     def run(self):
         self._icon = pystray.Icon(
-            name="ScreenTimeTracker",
+            name="Chronoscope",
             icon=_create_icon_image(),
             title=self._tooltip,
             menu=self._build_menu(),
@@ -113,7 +113,7 @@ class TrayManager:
         """导出今日数据为 CSV"""
         def do_export():
             try:
-                default_name = f"screen_time_today_{datetime.now().strftime('%Y%m%d')}.csv"
+                default_name = f"chronoscope_today_{datetime.now().strftime('%Y%m%d')}.csv"
                 filepath = filedialog.asksaveasfilename(
                     defaultextension=".csv",
                     filetypes=[("CSV 文件", "*.csv")],
@@ -138,7 +138,7 @@ class TrayManager:
         """导出本周数据为 CSV"""
         def do_export():
             try:
-                default_name = f"screen_time_weekly_{datetime.now().strftime('%Y%m%d')}.csv"
+                default_name = f"chronoscope_weekly_{datetime.now().strftime('%Y%m%d')}.csv"
                 filepath = filedialog.asksaveasfilename(
                     defaultextension=".csv",
                     filetypes=[("CSV 文件", "*.csv")],
@@ -168,7 +168,7 @@ class TrayManager:
                     return
                 start_date, end_date = result
 
-                default_name = f"screen_time_{start_date}_{end_date}.csv"
+                default_name = f"chronoscope_{start_date}_{end_date}.csv"
                 filepath = filedialog.asksaveasfilename(
                     defaultextension=".csv",
                     filetypes=[("CSV 文件", "*.csv")],
@@ -203,7 +203,7 @@ class TrayManager:
     def _on_toggle_pause(self, icon, item):
         if self._monitor.is_paused:
             self._monitor.resume()
-            icon.icon = _create_icon_image("ST")
+            icon.icon = _create_icon_image("CS")
         else:
             self._monitor.pause()
             icon.icon = _create_icon_image("||")

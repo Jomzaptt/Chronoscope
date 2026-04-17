@@ -1,4 +1,4 @@
-"""屏幕时间追踪器 — 主入口"""
+"""Chronoscope — 主入口"""
 
 import sys
 import os
@@ -14,7 +14,7 @@ from src.monitor import WindowMonitor
 from src.tray import TrayManager
 from src.idle_detector import IdleDetector
 
-log = logging.getLogger("ScreenTimeTracker")
+log = logging.getLogger("Chronoscope")
 
 
 def _ensure_single_instance():
@@ -49,7 +49,7 @@ def _setup_logging():
 
 def main():
     _setup_logging()
-    log.info("Starting ScreenTimeTracker")
+    log.info("Starting Chronoscope")
 
     mutex = _ensure_single_instance()
 
@@ -86,7 +86,7 @@ def main():
         monitor.join(timeout=3)
         storage.flush_daily_summary()
         storage.close()
-        log.info("ScreenTimeTracker stopped")
+        log.info("Chronoscope stopped")
 
 
 if __name__ == "__main__":

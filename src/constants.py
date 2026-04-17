@@ -1,13 +1,13 @@
-"""常量定义"""
+"""Chronoscope 常量定义"""
 
 import os
 
-APP_NAME = "ScreenTimeTracker"
-APP_MUTEX = "Global\\ScreenTimeTrackerMutex"
+APP_NAME = "Chronoscope"
+APP_MUTEX = "Global\\ChronoscopeMutex"
 
 # 数据目录
 DATA_DIR = os.path.join(os.environ.get("LOCALAPPDATA", "."), APP_NAME)
-DB_PATH = os.path.join(DATA_DIR, "screentime.db")
+DB_PATH = os.path.join(DATA_DIR, "chronoscope.db")
 CONFIG_PATH = os.path.join(DATA_DIR, "config.json")
 ICON_CACHE_DIR = os.path.join(DATA_DIR, "icons")
 

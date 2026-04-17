@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Screen Time Tracker is a Windows desktop application that monitors and records user's application usage time. It runs in the system tray with background window monitoring and SQLite storage.
+Chronoscope is a Windows desktop application that monitors and records user's application usage time. It runs in the system tray with background window monitoring and SQLite storage.
 
 ## Dependencies
 
@@ -97,7 +97,7 @@ UI Windows (tkinter)
 
 ### Key Design Patterns
 
-**Single Instance**: Uses Windows Named Mutex (`Global\\ScreenTimeTrackerMutex`) to prevent multiple instances.
+**Single Instance**: Uses Windows Named Mutex (`Global\\ChronoscopeMutex`) to prevent multiple instances.
 
 **Thread-Safe Storage**: StorageManager uses `threading.Lock()` for all SQLite operations. SQLite is configured with WAL mode for better concurrency.
 
@@ -113,7 +113,7 @@ UI Windows (tkinter)
 
 ### Configuration
 
-Config stored in JSON at `%LOCALAPPDATA%\ScreenTimeTracker\config.json`:
+Config stored in JSON at `%LOCALAPPDATA%\Chronoscope\config.json`:
 - `idle_threshold`: Seconds before considering user idle (default: 300)
 - `data_retention_days`: Days to keep data (default: 90)
 - `record_window_title`: Whether to store window titles (privacy concern)
@@ -123,8 +123,8 @@ Config stored in JSON at `%LOCALAPPDATA%\ScreenTimeTracker\config.json`:
 
 ### Data Storage Location
 
-All data stored in `%LOCALAPPDATA%\ScreenTimeTracker\`:
-- `screentime.db` - SQLite database
+All data stored in `%LOCALAPPDATA%\Chronoscope\`:
+- `chronoscope.db` - SQLite database
 - `config.json` - User configuration
 - `app.log` - Application logs
 - `icons/` - Cached application icons (future use)
@@ -155,7 +155,7 @@ All data stored in `%LOCALAPPDATA%\ScreenTimeTracker\`:
 
 ### CSV Export Format
 
-**Today's export**: `screen_time_today_YYYYMMDD.csv`
+**Today's export**: `chronoscope_today_YYYYMMDD.csv`
 ```
 应用名称,使用时长（秒）,占比（%）
 Chrome,3600,40.5
@@ -165,7 +165,7 @@ VSCode,2700,30.3
 总计,8900,100.0
 ```
 
-**Weekly export**: `screen_time_weekly_YYYYMMDD.csv`
+**Weekly export**: `chronoscope_weekly_YYYYMMDD.csv`
 ```
 日期,使用时长（秒）
 2024-01-10,7200
@@ -215,7 +215,7 @@ Uses `utf-8-sig` encoding for Excel compatibility.
 
 ### Debugging
 
-Logs written to `%LOCALAPPDATA%\ScreenTimeTracker\app.log`:
+Logs written to `%LOCALAPPDATA%\Chronoscope\app.log`:
 ```
 2024-01-10 10:15:30 [INFO] WindowMonitor started
 2024-01-10 10:15:31 [DEBUG] App changed: Chrome → VSCode

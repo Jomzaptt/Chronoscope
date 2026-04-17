@@ -92,6 +92,7 @@ def build_installer():
         Path(os.environ.get("ProgramFiles", "C:\\Program Files")) / "Inno Setup 6" / "ISCC.exe",
         Path("C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe"),
         Path("C:\\Program Files\\Inno Setup 6\\ISCC.exe"),
+        Path("D:\\Inno Setup 6\\ISCC.exe"),
     ]
 
     iscc = None
